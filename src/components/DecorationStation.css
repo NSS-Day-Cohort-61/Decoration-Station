@@ -1,0 +1,51 @@
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-card {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-name {
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.item-img {
+  height: 20rem;
+  width: 20rem;
+  margin: 1rem;
+  box-shadow: 4px 3px 6px -1px grey;
+}
+
+.christmas {
+  background-image: url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3538&q=80");
+}
+
+.halloween {
+  background-image: url('https://images.unsplash.com/photo-1592887714077-1c2ca9cdcf48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80');
+}
+
+.thanksgiving {
+  background-image: url('https://images.unsplash.com/photo-1538883689728-2c32af36a313?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80');
+}
+
+#filter-bar {
+  background-color: lightgray;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  box-shadow: 1px 3px 4px grey;
+}
+
+#season-select {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-left: 2rem;
+}
