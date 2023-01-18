@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { ItemsList } from './ItemsList'
+import { SeasonFilter } from './SeasonFilter'
+import { NewDecorationForm } from './NewDecorationForm'
 import './DecorationStation.css'
 
 export const DecorationStation = () => {
@@ -7,7 +10,14 @@ export const DecorationStation = () => {
   const [items, setItems] = useState([]) // [stateVariable, functionToSetStateVariable]
   const [filteredItems, setFilteredItems] = useState([])
   const [seasons, setSeasons] = useState([])
+  const [categories, setCategories] = useState([])
   const [seasonChoice, setSeasonChoice] = useState(0)
+  const [userChoices, setUserChoices] = useState({
+    name: '',
+    imageUrl: '',
+    seasonId: 0,
+    categoryId: 0,
+  })
 
   useEffect(() => {
     fetch('http://localhost:8088/items')
@@ -21,10 +31,15 @@ export const DecorationStation = () => {
       .then((data) => {
         setSeasons(data)
       })
+
+    fetch('http://localhost:8088/categories')
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data)
+      })
   }, []) // An empty dependency array listens for the initial render of this component
 
   useEffect(() => {
-    console.log('useEffect triggered')
     if (seasonChoice === 0) {
       setFilteredItems(items)
     } else {
@@ -47,45 +62,35 @@ export const DecorationStation = () => {
   // Set the seasonChoice state to select value
   // Filter items based off user choice
 
+  // New Item Form
+  // Name text
+  // Image URL text
+  // Season radio
+  // Category radio
+
   return (
+    // The surrounding <></> is a (React) fragment
     <>
-      <div id="filter-bar">
-        <select
-          className="filter-box"
-          value={seasonChoice}
-          id="season-select"
-          onChange={(event) => {
-            setSeasonChoice(parseInt(event.target.value))
-          }}
-        >
-          <option value="0">All Seasons</option>
-          {seasons.map((season) => {
-            return (
-              <option key={season.id} value={season.id}>
-                {season.name}
-              </option>
-            )
-          })}
-        </select>
-      </div>
-      <div
-        className={`${seasons
-          .find((seasonObj) => seasonObj.id === seasonChoice)
-          ?.name.toLowerCase()} items-container`}
-      >
-        {filteredItems.map((decorItem) => {
-          return (
-            <div key={decorItem.id} className="item-card">
-              <img
-                src={decorItem.imageUrl}
-                alt={decorItem.name}
-                className="item-img"
-              />
-              <div className="item-name">{decorItem.name}</div>
-            </div>
-          )
-        })}
-      </div>
+      {/* The keys can be named the same as the value */}
+      <SeasonFilter
+        seasonChoice={seasonChoice}
+        setSeasonChoice={setSeasonChoice}
+        seasons={seasons}
+      />
+      <NewDecorationForm
+        userChoices={userChoices}
+        setUserChoices={setUserChoices}
+        seasons={seasons}
+        categories={categories}
+        setItems={setItems}
+        setSeasonChoice={setSeasonChoice}
+      />
+      <ItemsList
+        seasonsArray={seasons}
+        seasonChoiceId={seasonChoice}
+        filteredItemsArray={filteredItems}
+      />
+      {/* ItemsList(seasons, seasonChoice, filteredItems)  -- How this looked in vanilla JS*/}
     </>
   )
 }
