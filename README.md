@@ -48,6 +48,10 @@
 Clone this repo and make an api directory with a database.json file.
 Add the following data to the database.json file:
 
+In your api directory in your terminal, run:
+
+`json-server database.json -p 8088`
+
 <details>
   <summary>json data</summary>
 
