@@ -2,11 +2,10 @@ import { NavBar } from './nav/NavBar'
 import './styles.css'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import { NewDecorationForm } from './forms/NewDecorationForm'
-import { AllItems } from './items/AllItems'
-import { HalloweenItems } from './items/HalloweenItems'
-import { ChristmasItems } from './items/ChristmasItems'
-import { ThanksgivingItems } from './items/ThanksgivingItems'
 import { ItemDetails } from './items/ItemDetails'
+import { ItemsList } from './items/ItemsList'
+import { Seasons } from '../data/constants'
+import { NotFound } from './NotFound'
 
 export const DecorationStation = () => {
   return (
@@ -20,25 +19,27 @@ export const DecorationStation = () => {
           </>
         }
       >
-        <Route index element={<AllItems />} />
-        <Route path="jolly" element={<ChristmasItems />} />
-        <Route path="gobble" element={<ThanksgivingItems />} />
-        <Route path="spooky" element={<HalloweenItems />} />
-        <Route path="new" element={<NewDecorationForm />} />
-        <Route path=":itemId" element={<ItemDetails />} />
+        <Route index element={<ItemsList />} />
+        <Route
+          path="jolly"
+          element={<ItemsList seasonId={Seasons.Christmas} />}
+        />
+        <Route
+          path="gobble"
+          element={<ItemsList seasonId={Seasons.Thanksgiving} />}
+        />
+        <Route
+          path="spooky"
+          element={<ItemsList seasonId={Seasons.Halloween} />}
+        />
+        <Route path="items">
+          <Route index element={<ItemsList />} />
+          <Route path="new" element={<NewDecorationForm />} />
+          <Route path="item/:itemId" element={<ItemDetails />} />
+          <Route path="*" exact={true} element={<NotFound />} />
+        </Route>
+        <Route path="*" exact={true} element={<NotFound />} />
       </Route>
     </Routes>
   )
 }
-
-// json-server -p 8088 database.json -w
-
-// Create a link on navbar for halloween items
-// Set up a Route for the halloween items
-// Create a HalloweenItems.js module
-// Create a HalloweenItems component
-// fetch the halloween items
-
-// Onclick for the image
-// New route for item detail view
-// Component for item details

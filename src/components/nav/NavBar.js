@@ -24,7 +24,7 @@ export const NavBar = () => {
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to="/new">
+        <Link className="navbar__link" to="/items/new">
           New Decoration
         </Link>
       </li>

@@ -29,12 +29,3 @@ export const ItemDetails = () => {
     </div>
   )
 }
-
-// cannot read properties of undefined
-// however, we can read properties the don't even exist on anything that is not null or undefined.
-
-// declare a state variable to hold the item
-// set up a useEffect to watch initial render
-// fetch our item
-// set the item to state
-// display the item details in jsx
